@@ -1,20 +1,24 @@
+import copy
 from arrow import Arrows
 
-arrow = Arrows
+board_temp=[]
+arrow = Arrows()
 print("=====2048 game=====")
 print("play the game with 'w,a,s,d'")
 print("press 'Enter' to start the game!")
 input()
 arrow.create()
 
-bor=arrow.board.copy()
+
+
 
 while True:
   arrow.clear()
   arrow.screen()
   arrow.key=input()
 
-  arrow.board_temp = arrow.board[:]
+  arrow.board_temp = copy.deepcopy(arrow.board)#깊은 복사((새롭게 복사))
+
   if arrow.key == 'w':
     arrow.Merge_up()
   elif arrow.key =='s':
@@ -26,11 +30,12 @@ while True:
   else:
     continue
   
-  #if (arrow.board_temp == arrow.board)==True:
-  #  continue
+
+  if (arrow.board_temp == arrow.board)==True:
+    continue
   arrow.create()
   arrow.clear() # window    
   arrow.screen()
-  print(arrow.board_temp == arrow.board)
+
   if arrow.quit_key == 1:
     break
